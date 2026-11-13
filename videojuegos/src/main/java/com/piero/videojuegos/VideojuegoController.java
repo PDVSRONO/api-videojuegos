@@ -1,4 +1,4 @@
-package com.piero.videojuegos;
+/*https://humble-spoon-7v9grqwwj579cv49-8080.app.github.dev/api/videojuegos*/
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -20,13 +20,11 @@ public class VideojuegoController {
         videojuegos.add(new Videojuego(contador.incrementAndGet(), "Minecraft", "Sandbox", "Multiplataforma", 99.90, 2011));
     }
 
-    // GET /api/videojuegos -> lista todos
     @GetMapping
     public List<Videojuego> listar() {
         return videojuegos;
     }
 
-    // GET /api/videojuegos/{id} -> busca uno por id
     @GetMapping("/{id}")
     public ResponseEntity<Videojuego> buscarPorId(@PathVariable Long id) {
         return videojuegos.stream()
@@ -36,7 +34,6 @@ public class VideojuegoController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // POST /api/videojuegos -> crea uno nuevo
     @PostMapping
     public ResponseEntity<Videojuego> crear(@RequestBody Videojuego datos) {
         if (datos.titulo() == null || datos.titulo().isBlank()) {
@@ -48,7 +45,7 @@ public class VideojuegoController {
                 datos.genero(),
                 datos.plataforma(),
                 datos.precio(),
-                datos.anio()
+                datos.año()
         );
         videojuegos.add(nuevo);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);

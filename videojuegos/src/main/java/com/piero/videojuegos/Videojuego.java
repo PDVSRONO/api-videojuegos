@@ -6,5 +6,5 @@ public record Videojuego(
         String genero,
         String plataforma,
         double precio,
-        int anio
+        int año
 ) {}
